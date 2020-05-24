@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Employee } from '../modals/employee';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,20 +11,25 @@ export class EmployeeService {
   constructor( private http:HttpClient) { }
  
 
-  getEmployee(id: number): Observable<any> {
-    return this.http.get(`${this.baseurl}/${id}`);
+  getEmployee(payload: number): Observable<any> {
+    return this.http.get(`${this.baseurl}/${payload}`);
   }
-
-  createEmployee(employee: Object): Observable<Object> {
-    return this.http.post(`${this.baseurl}`, employee);
+ 
+  createEmployee(payload: Employee): Observable<Object> {
+    return this.http.post(`${this.baseurl}`, payload);
   }
-
+ 
   updateEmployee(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseurl}/${id}`, value);
   }
+  // updateEmployee(employee: Employee): Observable<Object> {
+  //   console.log(employee);
+  
+  //   return this.http.put(`${this.baseurl}/${employee.id}`,employee);
+  // }
 
-  deleteEmployee(id: number): Observable<any> {
-    return this.http.delete(`${this.baseurl}/${id}`, { responseType: 'text' });
+  deleteEmployee(payload: number): Observable<any> {
+    return this.http.delete(`${this.baseurl}/${payload}`, { responseType: 'text' });
   }
   getEmployeesList(): Observable<any> {
     return this.http.get(`${this.baseurl}`);
